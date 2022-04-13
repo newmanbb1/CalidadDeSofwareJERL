@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include partials/head %>
+
+<body>
+
+   
+
+<!-- NavBar -->
+<% if (typeof locals.user != 'undefined') {
+    %> <%- include partials/newUserNavbar %> <%
+  } else { %> 
+  <%- include partials/navbar %>
+  <% } %>
+
+    <div class="separador"></div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Landing Content -->
+            <%- include partials/landingContent %>
+        </div>
+    </div>
+<!-- Footer -->
+<%- include partials/footer %>
+</body>
+
+</html>

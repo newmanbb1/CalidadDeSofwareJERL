@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include partials/head %>
+
+<body>
+  
+  <!-- NavBar -->
+  <% if (isAuthenticated) {
+    %> <%- include partials/newUserNavbar %> <%
+  } else { %> 
+  <%- include partials/navbar %>
+  <% } %>
+
+  <!-- Header -->
+  <%- include partials/carousel-landing %>
+  
+
+  <div class="container">
+    <div class="row">
+      <!-- Hot this week! -->
+      <%- include partials/destacado %>
+    </div> 
+  </div>   
+
+
+  <div class="container">
+    <div class="row">
+      <!-- Landing Content -->
+      <%- include partials/landingContent %>
+    </div>
+  </div>
+                    
+  <!-- Footer -->
+  <%- include partials/footer %>
+  
+</body>
+
+</html>

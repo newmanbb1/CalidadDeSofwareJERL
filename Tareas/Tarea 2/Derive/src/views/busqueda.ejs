@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include partials/head %>
+
+    <body>
+
+        <!-- NavBar -->
+        <% if (isAuthenticated) { %>
+            <%- include partials/newUserNavbar %>
+                <% } else { %>
+                    <%- include partials/navbar %>
+                        <% } %>
+                                <!-- Contact Content -->
+
+                                <div class="separador"></div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4 justify-content-center">
+                                            <div class="align-items-center">
+                                                <h5 class="wv-heading--title">
+                                                    Estos son los resultados de tu búsqueda
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 text-right">
+                                            
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchModal">
+                                            Búsqueda Avanzada
+                                            </button>
+                                            <form class="text-left" action="/busqueda-avanzada" method="GET">  
+                                                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title text-center" id="searchModalLabel">Búsqueda avanzada</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-row">
+                                                                <div class="form-group col">
+                                                                    <label for="searchByKey">Palabra Clave</label>
+                                                                    <input type="text" name="keyWord" class="form-control" placeholder="Ej. Navegar" id="searchByKey">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col">
+                                                                    <label for="searchByCategory">Categoría</label>
+                                                                    <select name="category" class="custom-select" id="searchByCategory">
+                                                                        <option selected>Elegir...</option>
+                                                                        <% categories.forEach( category => {%>
+                                                                            <option value = "<%=category.id%>">
+                                                                                <%=category.category%>
+                                                                            </option>                                                                   
+                                                                        <% }) %>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col">
+                                                                    <label for="searchByLocation">Lugar</label>
+                                                                    <select name="location"class="custom-select" id="searchByLocation">
+                                                                        <option selected>Elegir...</option>
+                                                                        <% locations.forEach( location => {%>
+                                                                            <option value = "<%=location.id%>">
+                                                                                <%=location.location%>
+                                                                            </option>
+                                                                        <% }) %>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col">
+                                                                    <label for="searchByPrice">Precio máximo de la Experiencia</label>
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text">$</span>
+                                                                        </div>
+                                                                        <input type="number" name= "price" class="form-control" id="searchByPrice">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                        <button type="submit" class="btn btn-primary">Buscar!</button>
+                                                    </div>
+                                                </div>
+                                            </form>    
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="container">
+                                        <hr class="mt-3 div-line">
+                                    <div class="row">
+                                        
+                                        
+                                        <% products.forEach((product) => { %>
+                                        <div class="col-md-3 col-lg-3 highlighter">
+                                            <div class="card h-100">
+                                                <img class="card-img-top mt-2" src="<%=product.img%>" alt="" id="experiencePrimaryImage">
+                                                <div class="card-body">
+                                                    <h4 class="card-title" id="experienceTittle">
+                                                        <%= product.name%>
+                                                    </h4>
+                                                    <ul class="list-inline small how-many-stars stars-left-align">
+                                                        <li class="list-inline-item m-0"><i class="far fa-star text-gray starsize"></i></li>
+                                                        <li class="list-inline-item m-0"><i class="fas fa-star text-success starsize"></i></li>
+                                                        <li class="list-inline-item m-0"><i class="fas fa-star text-success starsize"></i></li>
+                                                        <li class="list-inline-item m-0"><i class="fas fa-star text-success starsize"></i></li>
+                                                        <li class="list-inline-item m-0"><i class="fas fa-star text-success starsize"></i></li>
+                                                    </ul>
+                                                    <span class="text-muted font-weight-normal font-italic d-block small" id="categoryName">Categoría: <%= product.category.category%></span>
+                                                    <p class="card-text" id="experienceDescrption">
+                                                        <%= product.description%>
+                                                    </p>
+                                                    <a href="/products/detail/<%= product.id%>" class="btn btn-primary">Quiero saber más!</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } ) %>
+                                        
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            
+                                <!-- Footer -->
+                                <%- include partials/footer.ejs %>
+
+    </body>
+
+</html>

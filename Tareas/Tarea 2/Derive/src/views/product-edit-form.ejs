@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+   <%- include partials/head %>
+
+<body>
+    <!-- NavBar -->
+    <% if (isAuthenticated) { %>
+    <%- include partials/newUserNavbar %>
+    <% } else { %> 
+    <%- include partials/navbar %>
+    <% } %>
+   <div class="container">
+      <div class="col-12 mx-auto text-center">
+         <div class="header-title">
+            <h1 class="wv-heading--title">
+               Edite la información que deba ser modificada
+            </h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="container">
+            <div class="col-12 mx-auto">
+               <% if (typeof errors != 'undefined') { %>
+            <p style="color:red">ERROR</p>
+            <ul>
+                <% for (let i =0; i < errors.length; i++){ %>
+                    <li>
+                        <%=errors[i].msg%>
+                    </li>
+                <% } %>
+            </ul>
+        <% } %>
+               <div class="myform form">
+                  <% if(product) {%>
+                  <form action="/products/edit/<%=product.id%>?_method=put"  name="edit-product" method="POST">
+                     <input type="hidden" name="_method" value="PUT" >
+                     <div class="row">
+                        <div class="col">
+                           <div class="form-group">
+                              <label for="name">Nombre del Producto</label>
+                              <input type="text" name="name"  class="form-control my-input" value= "<%= product.name%>" id="name" placeholder="Ej: Escapada romántica" required="required" minlength="5" maxlength="20">
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                           <div class="form-group">
+                              <label for="price">Valor/Precio</label>
+                              <input type="text" name="price"  class="form-control my-input" value= "<%= product.price%>" id="price" placeholder="Ej: 1250" required="required">
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                           <div class="form-group">
+                              <label for="category">Categoría</label>
+                              <select name="category"  class="form-control my-input" id="category" required="required">
+                                 <% categories.forEach( category => {%>
+                                    <% if (category.id == product.categories_id) { %>
+                                       <option value = "<%=product.category.id%>" selected>
+                                          <%=product.category.category%>
+                                      </option>                                   
+                                       <%} else { %>
+                                          <option value = "<%=category.id%>">
+                                             <%=category.category%>
+                                         </option> 
+                                          <% } %>                                                        
+                                <% }) %>
+                            </select>
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                           <div class="form-group">
+                              <label for="location">Ubicación</label>
+                              <select name="location"  class="form-control my-input" id="location" required="required">
+                                 <% locations.forEach(place => {%>
+                                    <% if (place.id == product.location.id) { %>
+                                       <option value = "<%=product.location.id%>" selected>
+                                          <%=product.location.location%>
+                                      </option>                                   
+                                       <%} else { %>
+                                          <option value = "<%=place.id%>">
+                                             <%=place.location%>
+                                         </option> 
+                                          <% } %>                                                        
+                                <% }) %>
+                            </select>
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                           <div class="form-group">
+                              <label  for="description">Descripción</label>
+                              <textarea type="text" name="description"  class="form-control my-input" value= "<%= product.description%>" id="description"  rows="5" required="required" minlength="50" maxlength="150"><%= product.description%></textarea>
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                           <div class="form-group">
+                              <label  for="stock">Stock</label>
+                              <input type="number" class="form-control" name="stock" min="1" value="<%= product.stock%>" required="required">
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                        </div>
+                           
+                        <div class="col">
+                           <div>
+                              <div class="row">
+                                 <div class="col img-edit-col"><img src="<%=product.img%>" class="img-edit-content" alt="#"></div>
+                                 <div class="col"><input type="url" name="img"  class="form-control my-input" id="img" value="<%= product.img%>"></div>
+                              </div>
+                          </div>
+                          <div class= "dropdown-divider"> </div>
+                          <div>
+                              <div class="row">
+                                 <div class="col img-edit-col"><img src="<%=product.img2%>" class="img-edit-content" alt="#"></div>
+                                 <div class="col"><input type="url" name="img2"  class="form-control my-input" id="img2" value="<%= product.img2%>"></div>
+                              </div>
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                           <div>
+                              <div class="row">
+                                 <div class="col img-edit-col"><img src="<%=product.img3%>" class="img-edit-content" alt="#"></div>
+                                 <div class="col"><input type="url" name="img3"  class="form-control my-input" id="img3" value="<%= product.img3%>"></div>
+                              </div>
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                           <div>
+                              <div class="row">
+                                 <div class="col img-edit-col"><img src="<%=product.img4%>" class="img-edit-content" alt="#"></div>
+                                 <div class="col"><input type="url" name="img4"  class="form-control my-input" id="img4" value="<%= product.img4%>"></div>
+                              </div>
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                           <div>
+                              <div class="row">
+                                 <div class="col img-edit-col"><img src="<%=product.img5%>" class="img-edit-content" alt="#"></div>
+                                 <div class="col"><input type="url" name="img5"  class="form-control my-input" id="img5" value="<%= product.img5%>"></div>
+                              </div>
+                           </div>
+                           <div class= "dropdown-divider"> </div>
+                        </div>
+                     </div>
+                     <div class="separador"></div>
+                     <div class= "dropdown-divider"> </div>
+                     <div>
+                        <button type="submit" class=" btn btn-block send-button tx-tfm">Editar producto</button>
+                     </div>
+                  </form>
+                  
+               </div>
+            </div>
+         </div>       
+      </div>
+      <div class= "dropdown-divider"> </div>
+      <div class="row">
+         <div class="container">
+            <div class="col">
+               <div class="text-center">
+                  <form action="/products/delete/<%=product.id%>?_method=DELETE" method="POST" name="delete-product">
+                     <button type="submit" class="btn btn-danger del-btn">Eliminar producto</button>
+                  </form> 
+                  <% } %>
+               </div>
+               <div class= "dropdown-divider"> </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Footer -->
+   <%- include partials/footer %>
+</body>
+</html>

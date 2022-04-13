@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include partials/head %>
+
+<body>
+    <!-- NavBar -->
+    <% if (isAuthenticated) {
+        %> <%- include partials/newUserNavbar %> <%
+      } else { %> 
+      <%- include partials/navbar %>
+      <% } %>
+
+
+
+    <div class="container">
+      <div class="col-12 mx-auto text-center">
+         <div class="header-title">
+            <h1 class="wv-heading--title">
+               Cargue la información del nuevo producto
+            </h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="container">
+         <div class="col-12 mx-auto">
+            <div class="myform form">
+               <form action="/products/create" method="POST" name="new-product">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="name">Nombre del Producto</label>
+                                    <input type="text" name="name"  class="form-control my-input" id="name" placeholder="Ej: Escapada romántica" required="required" minlength="5" maxlength="20">
+                                </div>
+                                <div class= "dropdown-divider"> </div>
+                                <div class="form-group">
+                                    <label for="price">Valor/Precio</label>
+                                    <input type="number" name="price"  class="form-control my-input" id="price" placeholder="Ej: 1250" required="required">
+                                </div>
+                                <div class= "dropdown-divider"> </div>
+                                <div class="form-group">
+                                    <label for="category">Categoría</label>
+                                    <select name="category"  class="form-control my-input" id="category" placeholder="Ej: Escapada" required="required">
+                                        <% categories.forEach( category => {%>
+                                            <option value = "<%=category.id%>">
+                                                <%=category.category%>
+                                            </option>
+                                   
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class= "dropdown-divider"> </div>
+                                <div class="form-group">
+                                    <label for="location">Ubicación</label>
+                                    <select name="location"  class="form-control my-input" id="location" placeholder="Ej: Escobar, Provincia de Buenos Aires, Argentina" required="required">
+                                        <% locations.forEach( location => {%>
+                                            <option value = "<%=location.id%>">
+                                                <%=location.location%>
+                                            </option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class= "dropdown-divider"> </div>
+                                <div class="form-group">
+                                    <label  for="description">Descripción</label>
+                                    <textarea class="form-control my-input" name="description" rows="3" id="description" placeholder="Ej: Rompé con la rutina y disfrutá de una escapada románticaen el medio de la naturaleza en un hotel con encanto." required="required" minlength="50" maxlength="150"></textarea>
+                                </div>
+                                <div class= "dropdown-divider"> </div>
+                            </div>
+                        
+                        
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="img">Cargar Imagenes</label>
+                                    <input type="url" name="img"  class="form-control my-input" id="img" placeholder="Imagen #1" required="required">
+                                    <div class= "dropdown-divider"> </div>
+                                    <input type="url" name="img2"  class="form-control my-input" id="img2" placeholder="Imagen #2" required="required">
+                                    <div class= "dropdown-divider"> </div>
+                                    <input type="url" name="img3"  class="form-control my-input" id="img3" placeholder="Imagen #2" required="required">
+                                    <div class= "dropdown-divider"> </div>
+                                    <input type="url" name="img4"  class="form-control my-input" id="img4" placeholder="Imagen #4" required="required">
+                                    <div class= "dropdown-divider"> </div>
+                                    <input type="url" name="img5"  class="form-control my-input" id="img5" placeholder="Imagen #5" required="required">
+                                </div>
+                                <div class= "dropdown-divider"> </div>
+                                <div class="form-group">
+                                    <label for="stock">Stock</label>
+                                    <input type="number" class="form-control" name="stock" min="1" value="">
+                                </div>
+                                <div class= "dropdown-divider"> </div>                                
+                            </div>  
+                             
+                        </div>
+                                <div class="text-center ">
+                                    <button type="submit" class=" btn btn-block send-button tx-tfm">Cargar producto</button>
+                                </div>
+                            </div>
+                        </div>
+                  </form>
+            </div>
+         </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Footer -->
+   <%- include partials/footer %>
+</body>
+</html>
